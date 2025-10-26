@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Redirect root to public directory
+RewriteRule ^$ public/index.php [L]
+
+# Handle product detail pages
+RewriteRule ^product/([0-9]+)/?$ public/product.php?id=$1 [L,QSA]
+
+# Handle other requests to public directory (only if file doesn't exist)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/$1 [L]

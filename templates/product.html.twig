@@ -1,19 +1,20 @@
 {% extends "base.html.twig" %}
 
-
 {% block content %}
-
 <div class="product-detail">
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.subtitle }}</p>
+    <div class="product-detail-image">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+    </div>
     
-    <img src="{{ product.image}}" alt="{{ product.name }}">
-
-    {% for paragraph in product.paragraphs %}
-    <p>{{ paragraph}}</p>
-    {% endfor %}
-
-    <a href="index.php"> Nazaj na seznam</a>
+    <div class="product-detail-content">
+        <h1 class="product-titleP">{{ product.name }}</h1>
+        <p class="product-subtitleP">{{ product.subtitle }}</p>
+        
+        {% for paragraph in product.paragraphs %}
+        <p class="product-paragraphP">{{ paragraph }}</p>
+        {% endfor %}
+        
+        <a href="index.php" class="back-button">NAZAJ NA SEZNAM</a>
+    </div>
 </div>
-
 {% endblock %}

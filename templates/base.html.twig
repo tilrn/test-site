@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="sl">
-
 <head>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}KABI TEST{% endblock %}</title>
+
     <link rel="stylesheet" href="css/styles.css">
-
-
-
+    
+    {% block head %}{% endblock %}
 </head>
-
 <body>
-<header>
-<div>
-    Logo
-</div>
-</header>
+    <header>
+        <div class="header-content">
+            <img src="images/logo.png" alt="KABI TEST" class="logo-image">
+        </div>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="index.php" class="nav-item"><img src="images/home.png" alt="Home" class="nav-icon">Domov</a></li>
+                <li><a href="#" class="nav-item">O nas</a></li>
+                <li><a href="#" class="nav-item">Kontakt</a></li>
+                <li><a href="#" class="nav-item">Pišite nam</a></li>
+                <li><a href="index.php" class="nav-item active">IZDEKLI</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-    {% block content %}{% endblock %}
-</main>
-
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 </body>
-
 </html>
