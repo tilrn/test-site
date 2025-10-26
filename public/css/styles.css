@@ -1,4 +1,4 @@
-/* Minimal CSS - Low Code Approach */
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -9,14 +9,14 @@ body {
     min-height: 100vh;
 }
 
-/* Header */
+
 header { margin: 2% 8% 0; }
 .header-content { display: flex; align-items: center; margin-bottom: 1.5%; }
 .logo-image { 
     height: 4em; width: auto; max-width: 200px;
 }
 
-/* Navigation */
+
 nav { 
     background: linear-gradient(90deg, #4A90E2, #7BB3F0);
     padding: 1% 2%; border-radius: 0.5em; width: 100%;
@@ -38,16 +38,16 @@ nav {
 .nav-item i { margin-right: 0.5%; }
 .nav-icon { width: 1em; height: 1em; margin-right: 0.3em; vertical-align: middle; display: inline-block; }
 
-/* Main Content */
+
 main { margin: 2% 8% 0; max-width: 84%; }
 
-/* Product Grid */
+
 .products-grid { 
     display: grid; grid-template-columns: repeat(auto-fit, minmax(22%, 1fr));
     gap: 2%; width: 100%; justify-content: center;
 }
 
-/* Product Cards */
+
 .product-card { 
     background: white; border-radius: 0.75em; box-shadow: 0 0.25em 1.25em rgba(0, 0, 0, 0.1);
     overflow: hidden; width: 100%; max-width: 28em; height: 45em; display: flex; flex-direction: column;
@@ -65,7 +65,7 @@ main { margin: 2% 8% 0; max-width: 84%; }
 .product-title { font-size: 1.25em; font-weight: bold; color: #333; ; }
 .product-subtitle { font-size: 1.4em; color: #666; }
 .product-description { margin-bottom: 1.25%; padding-top: 10%;}
-.product-paragraph { font-size: 0.875em; color: #555; margin-bottom: 0.6%; line-height: 1.5; }
+.product-paragraph { font-size: 0.875em; color: #555; padding-bottom: 5%;padding-top: 5%; }
 
 .product-titleP { font-size: 1.5em; font-weight: bold; color: #333; }
 .product-subtitleP { font-size: 1.4em; color: #666; padding-bottom: 5%; }
@@ -80,7 +80,7 @@ main { margin: 2% 8% 0; max-width: 84%; }
     margin-top: auto;
 }
 
-/* Product Detail */
+
 .product-detail { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
@@ -104,7 +104,7 @@ main { margin: 2% 8% 0; max-width: 84%; }
 }
 .back-button::before { content: "← "; margin-right: 0.5%; }
 
-/* Responsive Design */
+
 @media (max-width: 1400px) { main { max-width: 75%; } .products-grid { grid-template-columns: repeat(auto-fit, minmax(25%, 1fr)); gap: 1.5%; } }
 @media (max-width: 1200px) { 
     header, main { margin-left: 3%; margin-right: 3%; }
