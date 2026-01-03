@@ -12,15 +12,16 @@ Domača stran za vse Etra spletne aplikacije z uptime monitoring sistemom.
 
 ## Project Structure
 
-etra-intranet-homepage/
-├── backend/                 # Django backend
-│   ├── etra_backend/        # Django projektne nastavitve
-│   ├── uptime/              # Aplikacija za spremljanje dostopnosti
-│   └── manage.py
-├── src/                     # Angular izvorna koda
-├── dist/                    # Angular build
-├── Dockerfile
-└── README.md
+-etra-intranet-homepage/
+
+- -backend/ # Django backend
+- - - etra_backend/ # Django projektne nastavitve
+- - - uptime/ # Aplikacija za spremljanje dostopnosti
+- - - manage.py
+- - src/ # Angular izvorna koda
+- - dist/ # Angular build
+- - Dockerfile
+- - README.md
 
 ## Requirements
 
@@ -111,3 +112,4 @@ Changelog
 
 - 1.0.4 - Dodan Django backend z uptime monitoring sistemom, status panel komponenta
 - 1.0.3 - Urejen readme, dodan SharePoint, spremenjene slike
+```
