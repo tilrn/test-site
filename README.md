@@ -1,63 +1,113 @@
-# KABI TEST Website
+Domača stran za vse Etra spletne aplikacije z uptime monitoring sistemom.
 
-A responsive PHP website with Twig templating system that displays a product listing and individual product detail pages.
+**Live URL:** https://home.etra.kolektor.com/
 
 ## Features
 
-- **Product Listing Page**: Displays 5 products in a responsive grid layout
-- **Product Detail Page**: Shows individual product information with back navigation
-- **Responsive Design**: Optimized for mobile devices (<500px)
-- **Modern UI**: Clean design with blue gradient accents and dotted background
-- **Apache Compatible**: Works with Apache 2.4 and PHP 7/8
+- **Angular 12 Frontend** - Responzivna nadzorna plošča s povezavami do internih projektov
+- **Django REST API Backend** - Python backend za spremljanje dostopnosti
+- **Uptime Monitoring** - Periodično preverjanje zdravja vseh registriranih spletnih strani
+- **Status Panel** - Prikaz statusa v realnem času (up/down)
+- **SQLite Database** - Lahka baza za shranjevanje rezultatov preverjanja
 
-## File Structure
+## Project Structure
 
-```
-/
-├── index.php                 # Root redirect to public directory
-├── .htaccess                 # Apache rewrite rules
-├── composer.json             # PHP dependencies
-├── composer.lock             # Dependency lock file
-├── public/                   # Public web directory
-│   ├── index.php            # Product listing page
-│   ├── product.php          # Product detail page
-│   ├── css/
-│   │   └── styles.css       # Main stylesheet
-│   └── js/
-│       └── main.js          # JavaScript (if needed)
-└── templates/               # Twig templates
-    ├── base.html.twig       # Base template
-    ├── index.html.twig      # Product listing template
-    └── product.html.twig    # Product detail template
-```
+etra-intranet-homepage/
+├── backend/                 # Django backend
+│   ├── etra_backend/        # Django projektne nastavitve
+│   ├── uptime/              # Aplikacija za spremljanje dostopnosti
+│   └── manage.py
+├── src/                     # Angular izvorna koda
+├── dist/                    # Angular build
+├── Dockerfile
+└── README.md
 
-## Installation
+## Requirements
 
-1. Ensure Apache 2.4 with PHP 7+ is running
-2. Install Composer dependencies:
-   ```bash
-   composer install
-   ```
-3. Place files in web root directory
-4. Access via web browser
+- Python 3.8+
+- Node.js 14+
+- Docker (opcijsko)
 
-## Usage
+## Running the Application
 
-- **Product Listing**: Visit `/` or `/public/index.php`
-- **Product Detail**: Click "VEČ O IZDELKU" buttons or visit `/public/product.php?id=X`
+### Development
 
-## Design Specifications
+```bash
+# Frontend
+npm run start
 
-- **Background**: Light gray (#F5F5F5) with dotted texture
-- **Content Width**: 934px maximum
-- **Margins**: 150px left, 30px top
-- **Colors**: Blue gradients (#4A90E2 to #7BB3F0)
-- **Typography**: Arial sans-serif
-- **Mobile**: Responsive design for screens <500px
+# Backend
+cd backend
+python manage.py runserver
 
-## Technologies Used
+Docker
 
-- PHP 7/8
-- Twig Template Engine
-- CSS3 with Flexbox/Grid
-- Apache 2.4 with .htaccess
+docker build -t etra-intranet .
+docker run -p 8000:8000 etra-intranet
+
+Odpri http://localhost:8000
+
+Adding a New Site (Frontend)
+
+V /src/app/data.ts dodaj spletno stran:
+
+{
+  url: "polni-url-do-strani",
+  img: "/assets/img/ime-slike.png",
+  icon: "webpage-icon",
+  header: "Ime naslova",
+  description: "Opis"
+}
+
+Slika v /assets/img/ naj bo istih dimenzij kot ostale.
+
+Za novo ikono shrani .svg datoteko v /src/assets/icons/, nato dodaj v /src/app/app.component.ts constructor:
+
+this.matIconRegistry.addSvgIcon("webpage-icon", this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/icons/webpage.svg"));
+
+Adding a Site to Monitor (Backend)
+
+cd backend
+python manage.py shell
+
+from uptime.models import Site
+Site.objects.create(name="Ime strani", url="https://example.com/")
+exit()
+
+Zaženi preverjanje dostopnosti:
+
+python manage.py check_sites
+
+API Endpoints
+
+| Method | Endpoint                        | Opis                           |
+|--------|---------------------------------|--------------------------------|
+| GET    | /api/uptime/sites/              | Seznam vseh spremljanih strani |
+| GET    | /api/uptime/sites/{id}/         | Podrobnosti posamezne strani   |
+| GET    | /api/uptime/sites/{id}/history/ | Zgodovina preverjanj           |
+| GET    | /api/uptime/status/             | Hiter pregled statusov         |
+
+Deployment
+
+1. Posodobi verzijo v package.json
+2. Poženi build_and_push.ps1
+3. Posodobi verzijo v k8s-etra-intranet-homepage.yml
+4. Poženi kubectl apply -f k8s-etra-intranet-homepage.yml
+
+Periodic Uptime Checks
+
+Dodaj v crontab za preverjanje vsakih 5 minut:
+
+*/5 * * * * cd /path/to/backend && python manage.py check_sites
+
+Technologies
+
+- Frontend: Angular 12, Angular Material
+- Backend: Django 6.0, Django REST Framework
+- Database: SQLite
+- Containerization: Docker, Kubernetes
+
+Changelog
+
+- 1.0.4 - Dodan Django backend z uptime monitoring sistemom, status panel komponenta
+- 1.0.3 - Urejen readme, dodan SharePoint, spremenjene slike
